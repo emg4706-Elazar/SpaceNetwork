@@ -56,10 +56,14 @@ my_space = SpaceNetwork(level=3)
 earth = SpaceEntityNotSat("Earth",0)
 sat1 = Satellite("Sat1",100)
 sat2 = Satellite("Sat2",200)
+sat3 = Satellite("Sat3",300)
+sat4 = Satellite("Sat4",400)
 
-p1 = Packet("Hello, How are you?",sat1,sat2)
-p_final = Packet("Hello from Earth",sat1,sat2)
-p_earth_to_sat1 = RelayPacket(p_final,earth,sat1)
+# p1 = Packet("Hello, How are you?",sat1,sat2)
+p_final = Packet("Hello from Earth",sat3,sat4)
+p_earth_to_sat3 = RelayPacket(p_final,sat2,sat3)
+p_earth_to_sat2 = RelayPacket(p_earth_to_sat3,sat1,sat2)
+p_earth_to_sat1 = RelayPacket(p_earth_to_sat2,earth,sat1)
 
 try:
     attempt_transmission(p_earth_to_sat1)
